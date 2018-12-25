@@ -8,6 +8,7 @@ pycodestyle = "*"
 mypy = "*"
 pytest = "*"
 freezegun = "*"
+ipython = "*"
 
 [packages]
 requests = "*"

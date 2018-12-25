@@ -3,14 +3,15 @@ from typing import List
 
 
 class Task:
-    def __init__(self, name: str, date_done: date, num_days: int,
+    def __init__(self, id: str, name: str, date_done: date, num_days: int,
                  **kwargs):
+        self.id: str = id
         self.name: str = name
         self.date_done: date = date_done
         self.num_days = num_days
         self.description: str = kwargs.get('description') or ''
         self.pending: bool = kwargs.get('pending') or False
-        self.num_tasks: int = kwargs.get('num_tasks') or 0
+        # self.num_tasks: int = kwargs.get('num_tasks') or 0
         self.next_task: int = kwargs.get('next_task') or 0
         self.tasks: List[str] = kwargs.get('tasks') or []
 
@@ -27,4 +28,4 @@ class Task:
         return date.today() >= self.date_due()
 
     def __repr__(self):
-        return str(self.__dict__)
+        return "<Task %s>" % str(self.__dict__)
