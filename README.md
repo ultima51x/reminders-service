@@ -18,20 +18,20 @@ There's a lot more stuff I can do, but this is mostly a toy project, but one I m
 
 ## Development
 
+To launch a shell within the pipenv for development:
+```sh
+pipenv shell
+```
+
 To install packages locally:
 
 ```sh
 pipenv install -e .
 ```
 
-To launch a shell within the pipenv for development:
-```sh
-pipenv shell
-```
-
 This project attempts to use python type annotations.  One can check them using mypy.
 ```sh
-mypy reminders tests
+mypy .
 ```
 
 There are a few automated tests.
