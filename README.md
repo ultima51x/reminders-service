@@ -17,16 +17,17 @@ To launch a shell within the pipenv for development:
 pipenv shell
 ```
 
-Automated Tests
+This project attempts to use python type annotations.  One can check them using mypy.
+```sh
+mypy reminders tests
+```
+
+There are a few automated tests.
 ```sh
 pytest
 ```
 
-In Python, to reload code
-```python
-reload(name_of_module)
-# then do import statement again
-```
+I like using IPython for development
 
-Ipython code reloading
+Enabling Ipython code reloading
 https://stackoverflow.com/questions/5364050/reloading-submodules-in-ipython
