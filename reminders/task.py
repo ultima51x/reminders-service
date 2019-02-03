@@ -9,7 +9,7 @@ class Task:
         self.name: str = name
         self.date_done: date = date_done
         self.num_days = num_days
-        self.description: str = kwargs.get('description') or ''
+        self.description: str = kwargs.get('description') or self.name
         self.pending: bool = kwargs.get('pending') or False
         self.current_task: int = kwargs.get('current_task') or 0
         self.tasks: List[str] = kwargs.get('tasks') or []
@@ -31,3 +31,9 @@ class Task:
 
     def __repr__(self):
         return "<Task %s>" % str(self.__dict__)
+
+    def email_subject(self) -> str:
+        return "Reminder: " + self.subject()
+
+    def email_body(self) -> str:
+        return "Description: " + self.description

@@ -3,7 +3,7 @@ from distutils.core import setup
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-requires = ['requests']
+requires = ['requests', 'boto3']
 tests_require = ['freezegun']
 
 setup(
@@ -17,9 +17,5 @@ setup(
     packages=['reminders'],
     install_requires=requires,
     tests_require=tests_require,
-    entry_points={
-        'console_scripts': [
-            'reminders = runner:main',
-        ],
-    }
+    entry_points={}
 )
