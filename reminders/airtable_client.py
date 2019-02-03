@@ -2,7 +2,7 @@ from typing import List, Dict
 import requests
 
 
-class AirtableSheet:
+class AirtableClient:
     def __init__(self, sheet_url: str, api_key: str):
         self.sheet_url = sheet_url
         self.default_headers = {

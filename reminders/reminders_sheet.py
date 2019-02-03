@@ -1,5 +1,5 @@
 from reminders.task import Task
-from reminders.airtable_sheet import AirtableSheet
+from reminders.airtable_client import AirtableClient
 from datetime import date, datetime
 from typing import List, Dict
 import requests
@@ -8,8 +8,8 @@ DATE_FORMAT = '%Y-%m-%d'
 
 
 class RemindersSheet:
-    def __init__(self, airtable: AirtableSheet):
-        self.airtable: AirtableSheet = airtable
+    def __init__(self, airtable: AirtableClient):
+        self.airtable: AirtableClient = airtable
         self.tasks: List[Task] = self.get_tasks()
 
     def get_tasks(self) -> List[Task]:
