@@ -30,7 +30,7 @@ class RemindersSheet:
             self.write_task(t, 'pending', None)
             self.write_task(t, 'date_done', datetime.today().strftime(DATE_FORMAT))
             if t.num_tasks() > 0:
-                if t.current_task == t.num_tasks:
+                if t.current_task >= t.num_tasks():
                     self.write_task(t, 'current_task', 1)
                 else:
                     self.write_task(t, 'current_task', t.current_task + 1)
@@ -52,7 +52,10 @@ class RemindersSheet:
         attrs['description'] = fields.get('description')
         attrs['pending'] = fields.get('pending')
         attrs['current_task'] = fields.get('current_task')
-        attrs['tasks'] = [v for k, v in fields.items() if k.find('task_') == 0]
+
+        task_keys = sorted([k for k, v in fields.items() if k.find('task_') == 0])
+        attrs['tasks'] = [fields.get(k) for k in task_keys]
+
         date_done: date = datetime.strptime(
             fields['date_done'], DATE_FORMAT).date()
 

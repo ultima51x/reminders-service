@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from typing import List
+import os
 
 
 class Task:
@@ -32,8 +33,11 @@ class Task:
     def __repr__(self):
         return "<Task %s>" % str(self.__dict__)
 
+    def completion_url(self) -> str:
+        return os.environ['API_GATEWAY_BASE_URL'] + '/' + self.id + '/complete'
+
     def email_subject(self) -> str:
         return "Reminder: " + self.subject()
 
     def email_body(self) -> str:
-        return "Description: " + self.description
+        return "Description: " + self.description + "\n" + "Link: " + self.completion_url()
