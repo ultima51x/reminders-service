@@ -10,7 +10,7 @@ class TestTask:
 
     def test_subject(self):
         task: Task = Task('a', 'some name', date(2018, 12, 15), 15,
-                          tasks=['joy', 'hell', 'cat'], next_task=2)
+                          tasks=['joy', 'hell', 'cat'], current_task=2)
         assert task.subject() == 'hell'
         task: Task = Task('a', 'some name', date(2018, 12, 15), 15)
         assert task.subject() == 'some name'

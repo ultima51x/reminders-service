@@ -11,13 +11,12 @@ class Task:
         self.num_days = num_days
         self.description: str = kwargs.get('description') or ''
         self.pending: bool = kwargs.get('pending') or False
-        # self.num_tasks: int = kwargs.get('num_tasks') or 0
-        self.next_task: int = kwargs.get('next_task') or 0
+        self.current_task: int = kwargs.get('current_task') or 0
         self.tasks: List[str] = kwargs.get('tasks') or []
 
     def subject(self) -> str:
         if self.tasks:
-            return self.tasks[self.next_task - 1]
+            return self.tasks[self.current_task - 1]
         else:
             return self.name
 
@@ -26,6 +25,9 @@ class Task:
 
     def due(self) -> bool:
         return date.today() >= self.date_due()
+
+    def num_tasks(self) -> int:
+        return len(self.tasks)
 
     def __repr__(self):
         return "<Task %s>" % str(self.__dict__)
