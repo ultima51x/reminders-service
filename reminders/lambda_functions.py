@@ -36,7 +36,7 @@ def weekly_task():
     logger.info('reminders - weekly task')
     tasks = get_sheet().tasks_due()
     t: Task
-    task_strings = [t.name for t in tasks]
+    task_strings = [t.subject() for t in tasks]
     send_email("Reminder: Weekly Stuff To Do", "\n".join(task_strings))
     return True
 
