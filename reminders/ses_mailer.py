@@ -1,5 +1,6 @@
 import boto3
 import os
+import settings
 
 CHARSET = "UTF-8"
 AWS_REGION = os.environ['AWS_SES_REGION_NAME']

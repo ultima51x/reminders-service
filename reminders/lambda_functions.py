@@ -3,6 +3,7 @@ from reminders.reminders_sheet import RemindersSheet
 from reminders.task import Task
 from reminders.ses_mailer import send_email
 import os
+import settings
 
 import logging
 logger = logging.getLogger()

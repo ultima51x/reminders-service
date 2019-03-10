@@ -16,17 +16,23 @@ Services used include:
 
 There's a lot more stuff I can do, but this is mostly a toy project, but one I make use of, and hopefully it doesn't cost too much in cloud hosting (my hope).
 
-## Development
+## Setup
 
-To launch a shell within the pipenv for development:
+It's best to make a virtual environment.  This used Python 3.7.
+
 ```sh
-pipenv shell
+python -m venv env
+source env/bin/activate
+pip install -r requirements.txt
 ```
 
-To install packages locally:
+within the directory
 
+## Development
+
+It's best to use a virtual environment.
 ```sh
-pipenv install -e .
+source env/bin/activate
 ```
 
 This project attempts to use python type annotations.  One can check them using mypy.
@@ -37,6 +43,13 @@ mypy .
 There are a few automated tests.
 ```sh
 pytest
+```
+
+Adding a requirement
+```sh
+pip freeze > requirements.txt
+git add requirements.txt
+git commit
 ```
 
 I like using IPython for development.  To enable IPython code reloading, check out
@@ -54,7 +67,7 @@ daily_task()
 
 ## Environment Variables
 
-This app relies on envrionment variables to run.  Locally, pipenv is able to read in `.env` to locally source environment variables.  A file of dummy environment variables is in `.env.dummy`.
+This app relies on envrionment variables to run.  Need to import settings.py `import settings` to locally source environment variables within Python.  A file of dummy environment variables is in `.env.dummy`.
 
 ## Deploy
 
