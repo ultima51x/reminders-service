@@ -35,6 +35,11 @@ It's best to use a virtual environment.
 source env/bin/activate
 ```
 
+To get out of the virtual environemnt
+```sh
+deactivate
+```
+
 This project attempts to use python type annotations.  One can check them using mypy.
 ```sh
 mypy .
