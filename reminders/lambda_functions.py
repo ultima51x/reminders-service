@@ -4,6 +4,7 @@ from reminders.task import Task
 from reminders.ses_mailer import send_email
 import os
 import settings
+import json
 
 import logging
 logger = logging.getLogger()
@@ -51,7 +52,7 @@ def mark_task_as_done(task_id):
     return {  # response for AWS API Gateway
         "statusCode": 200,
         "headers": {"Content-Type": "application/json"},
-        "body": {'date_due': str(task.date_due()), 'current_task': task.current_task_name()},
+        "body": json.dumps({'date_due': str(task.date_due()), 'current_task': task.current_task_name()}),
     }
 
 
