@@ -36,19 +36,22 @@ def daily_task():
 def weekly_task():
     logger.info('reminders - weekly task')
     tasks = get_sheet().tasks_due()
-    t: Task
-    task_strings = [t.subject() for t in tasks]
-    send_email("Reminder: Weekly Stuff To Do", "\n".join(task_strings))
+
+    if tasks:
+        t: Task
+        task_strings = [t.subject() for t in tasks]
+        send_email("Reminder: Weekly Stuff To Do", "\n".join(task_strings))
+
     return True
 
 
 def mark_task_as_done(task_id):
     logger.info('reminders - mark task as done' + task_id)
-    tasks = get_sheet().mark_task_as_done(task_id)
+    task: Task = get_sheet().mark_task_as_done(task_id)
     return {  # response for AWS API Gateway
-      "statusCode": 200,
-      "headers": {"Content-Type": "application/json"},
-      "body": "true",
+        "statusCode": 200,
+        "headers": {"Content-Type": "application/json"},
+        "body": {'date_due': str(task.date_due()), 'current_task': task.current_task_name()},
     }
 
 

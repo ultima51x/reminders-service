@@ -1,7 +1,7 @@
 from reminders.task import Task
 from reminders.airtable_client import AirtableClient
 from datetime import date, datetime
-from typing import List, Dict
+from typing import List, Dict, Any
 import requests
 
 DATE_FORMAT = '%Y-%m-%d'
@@ -16,36 +16,36 @@ class RemindersSheet:
         resp = self.airtable.get_records()
         return [self.__record_to_task(r) for r in resp.json()['records']]
 
-    def write_task(self, task: Task, key: str, value):
-        self.airtable.update_record(task.id, {key: value})
+    def write_task(self, task: Task, values: Dict[str, Any]) -> Task:
+        resp = self.airtable.update_record(task.id, values)
+        return self.__record_to_task(resp.json())
 
     def tasks_due(self) -> List[Task]:
         return [t for t in self.tasks if t.due()]
 
-    def mark_task_as_done(self, id) -> bool:
+    def mark_task_as_done(self, id) -> Any:
         index = [t.id for t in self.tasks].index(id)
 
         if index >= 0:
             t = self.tasks[index]
-            self.write_task(t, 'pending', None)
-            self.write_task(t, 'date_done', datetime.today().strftime(DATE_FORMAT))
+            values: Dict[str, Any] = {'pending': None, 'date_done': datetime.today().strftime(DATE_FORMAT)}
             if t.num_tasks() > 0:
                 if t.current_task >= t.num_tasks():
-                    self.write_task(t, 'current_task', 1)
+                    values['current_task'] = 1
                 else:
-                    self.write_task(t, 'current_task', t.current_task + 1)
-            return True
+                    values['current_task'] = t.current_task + 1
+            return self.write_task(t, values)
         else:
-            return False
+            return None
 
-    def mark_new_tasks(self):
+    def mark_new_tasks(self) -> List[Task]:
         new_tasks = [t for t in self.tasks if t.due() and not t.pending]
         t: Task
         for t in new_tasks:
-            self.write_task(t, 'pending', True)
+            self.write_task(t, {'pending': True})
         return new_tasks
 
-    def __record_to_task(self, record: Dict):
+    def __record_to_task(self, record: Dict) -> Task:
         fields = record['fields']
 
         attrs = {}

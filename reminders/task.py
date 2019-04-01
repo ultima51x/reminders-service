@@ -17,6 +17,9 @@ class Task:
         self.tasks: List[str] = kwargs.get('tasks') or []
 
     def subject(self) -> str:
+        return self.current_task_name()
+
+    def current_task_name(self) -> str:
         if self.tasks:
             return self.tasks[self.current_task - 1]
         else:

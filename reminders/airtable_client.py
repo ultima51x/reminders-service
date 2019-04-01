@@ -11,7 +11,7 @@ class AirtableClient:
         }
 
     def update_record(self, airtable_record_id: str, attributes: Dict):
-        resp = requests.patch(self.sheet_url + '/' + airtable_record_id,
+        return requests.patch(self.sheet_url + '/' + airtable_record_id,
                               headers=self.default_headers,
                               json={'fields': attributes})
 
