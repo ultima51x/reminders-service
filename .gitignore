@@ -2,3 +2,4 @@
 reminders.egg-info
 .env
 env
+__pycache__
