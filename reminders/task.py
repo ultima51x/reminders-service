@@ -42,6 +42,3 @@ class Task:
 
     def email_subject(self) -> str:
         return "Reminder: " + self.subject()
-
-    def email_body(self) -> str:
-        return "Description: " + self.description + "\n" + "Link: " + self.completion_url()

@@ -3,7 +3,7 @@ from distutils.core import setup
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-requires = ['requests', 'boto3']
+requires = ['requests', 'boto3', 'jinja2']
 tests_require = ['freezegun']
 
 setup(

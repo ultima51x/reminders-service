@@ -2,6 +2,7 @@ from reminders.airtable_client import AirtableClient
 from reminders.reminders_sheet import RemindersSheet
 from reminders.task import Task
 from reminders.ses_mailer import send_email
+from jinja2 import Template
 import os
 import settings
 import json
@@ -30,7 +31,10 @@ def daily_task():
     tasks = get_sheet().mark_new_tasks()
     t: Task
     for t in tasks:
-        send_email(t.email_subject(), t.email_body())
+        with open('templates/daily_task.html.jinja2') as f:
+            template = Template(f.read())
+        html = template.render(task=t)
+        send_email(t.email_subject(), html)
     return True
 
 
@@ -41,8 +45,10 @@ def weekly_task():
     if tasks:
         t: Task
         task_strings = [t.subject() for t in tasks]
-        send_email("Reminder: Weekly Stuff To Do", "\n".join(task_strings))
-
+        with open('templates/weekly_task.html.jinja2') as f:
+            template = Template(f.read())
+        html = template.render(tasks=tasks)
+        send_email("Reminder: Weekly Stuff To Do", html)
     return True
 
 

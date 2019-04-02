@@ -8,7 +8,7 @@ SENDER = os.environ['SENDER_MAIL']
 RECIPIENT = os.environ['RECIPIENT_MAIL']
 
 
-def send_email(subject, body):
+def send_email(subject: str, html: str):
     client = boto3.client('ses', region_name=AWS_REGION)
 
     response = client.send_email(
@@ -17,9 +17,9 @@ def send_email(subject, body):
         },
         Message={
             'Body': {
-                'Text': {
+                'Html': {
                     'Charset': CHARSET,
-                    'Data': body,
+                    'Data': html,
                 },
             },
             'Subject': {

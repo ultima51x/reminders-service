@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weekly Reminders</title>
+    </head>
+    <body>
+        <table>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{task.description}}</td>
+                    <td>
+                        <a href="{{task.completion_url()}}" target="_blank">Link</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
