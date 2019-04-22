@@ -11,6 +11,7 @@ zip -r9 $DIR/package.zip *
 # Add reminders to the zip
 cd $DIR
 zip -g package.zip reminders/*
+zip -g package.zip templates/*
 zip -g package.zip settings.py
 
 # This is for use with lambda, assuming the name is remindersAirtableFunction
