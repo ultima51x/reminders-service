@@ -37,7 +37,7 @@ python-dotenv==0.10.1
 PyYAML==3.13
 -e git+git@github.com:ultima51x/reminders-service.git@2a68d1bb3f1d24137e0249d00a0541b8819c9f13#egg=reminders
 requests==2.21.0
-rsa==3.4.2
+rsa==4.1
 s3transfer==0.2.0
 six==1.12.0
 traitlets==4.3.2
